@@ -18,12 +18,14 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     
-    @IBOutlet weak var rewtweetCountLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoritesCountLabel: UILabel!
     
+    @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     
     var isFavorited = false
+    var isRetweeted = false
     
     var tweet: Tweet! {
         didSet {
@@ -36,7 +38,7 @@ class TweetTableViewCell: UITableViewCell {
             }
             
             if let username = tweet.username {
-                nameLabel.text = "@\(username)"
+                usernameLabel.text = "@\(username)"
             }
             
             if let timeAgo = tweet.timeAgo {
@@ -48,7 +50,7 @@ class TweetTableViewCell: UITableViewCell {
             }
             
             if let retweetCount = tweet.retweetCount {
-                rewtweetCountLabel.text = "\(retweetCount)"
+                retweetCountLabel.text = "\(retweetCount)"
             }
             
             if let favoritesCount = tweet.favoritesCount {
@@ -59,6 +61,13 @@ class TweetTableViewCell: UITableViewCell {
                 isFavorited = favorited
                 if favorited {
                     favoriteButton.imageView?.image = #imageLiteral(resourceName: "active-like-button")
+                }
+            }
+            
+            if let retweeted = tweet.retweeted {
+                isRetweeted = retweeted
+                if retweeted {
+                    retweetButton.imageView?.image = #imageLiteral(resourceName: "active-retweet-button")
                 }
             }
         }
@@ -75,14 +84,31 @@ class TweetTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+
+    
     
     @IBAction func onRetweet(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didTapRetweet"), object: nil, userInfo: ["tweet": tweet])
-
+        
+        if let id = tweet.id {
+            if isRetweeted {
+                TwitterClient.sharedInstance?.unfavorite(tweetId: id, success: {
+                    self.isRetweeted = false
+                    self.toggleFavoriteButton(isFavorite: false)
+                }, failure: { (error) in
+                    
+                })
+            } else {
+                TwitterClient.sharedInstance?.favorite(tweetId: id, success: {
+                    self.isRetweeted = true
+                    self.toggleFavoriteButton(isFavorite: true)
+                }, failure: { (error) in
+                    
+                })
+            }
+        }
     }
     
     @IBAction func onFavoriteTweet(_ sender: Any) {
-        
         if let id = tweet.id {
             if isFavorited {
                 TwitterClient.sharedInstance?.unfavorite(tweetId: id, success: {
@@ -113,6 +139,27 @@ class TweetTableViewCell: UITableViewCell {
             currentFavoriteValue = currentFavoriteValue - 1
         }
         
+        
         favoritesCountLabel.text = "\(currentFavoriteValue)"
     }
+    
+    func toggleRetweetButton(isRetweeted: Bool) {
+        var currentRetweetValue = Int(retweetCountLabel.text!) ?? 0
+        
+        if isRetweeted {
+            retweetButton.imageView?.image = #imageLiteral(resourceName: "active-like-button")
+            currentRetweetValue = currentRetweetValue + 1
+        } else {
+            retweetButton.imageView?.image = #imageLiteral(resourceName: "like-button")
+            currentRetweetValue = currentRetweetValue - 1
+        }
+        
+        retweetCountLabel.text = "\(currentRetweetValue)"
+    }
+    
+    @IBAction func onReplyButton(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didTapRetweet"), object: nil, userInfo: ["tweet": tweet])
+        
+    }
+    
 }

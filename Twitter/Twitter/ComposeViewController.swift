@@ -33,23 +33,23 @@ class ComposeViewController: UIViewController {
             usernameLabel.text = "@\(username)"
         }
         
-        if let tweetText = tweet?.text {
-            tweetTextField.text = tweetText
+        if let tweetUsername = tweet?.username {
+            tweetTextField.text = "@\(tweetUsername) "
         }
         
         tweetTextField.becomeFirstResponder()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
 extension ComposeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         var message = tweetTextField.text!
-        TwitterClient.sharedInstance?.tweet(message: tweetTextField.text!, success: {
+        var replyTweetId: Int?
+        if let replyId = tweet?.id {
+            replyTweetId = replyId
+        }
+        
+        TwitterClient.sharedInstance?.tweet(message: tweetTextField.text!, replyTweetId: replyTweetId, success: {
             self.navigationController?.popViewController(animated: true)
         }, failure: { (error) in
             

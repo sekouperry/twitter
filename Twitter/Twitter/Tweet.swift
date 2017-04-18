@@ -22,6 +22,7 @@ class Tweet: Mappable {
     var timeAgo: String?
     var id: Int?
     var favorited: Bool?
+    var retweeted: Bool?
     
     required init?(map: Map) {
         
@@ -38,6 +39,7 @@ class Tweet: Mappable {
         createdAtString       <- map["created_at"]
         id                    <- map["id"]
         favorited             <- map["favorited"]
+        retweeted             <- map["retweeted"]
         convertToDate()
         calculateTimeAgo()
     }

@@ -10,6 +10,7 @@ import UIKit
 
 class TweetsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    let refreshControl = UIRefreshControl()
     var tweets = [Tweet]()
     
     override func viewDidLoad() {
@@ -17,7 +18,7 @@ class TweetsViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
         
-        let refreshControl = UIRefreshControl()
+        
         refreshControl.addTarget(self, action: #selector(self.refreshTableData(_:)), for: UIControlEvents.valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
         refreshTableData(refreshControl)
@@ -30,7 +31,6 @@ class TweetsViewController: UIViewController {
             }
         }
     }
-
 
     @IBAction func onLogoutButton(_ sender: UIBarButtonItem) {
         TwitterClient.sharedInstance?.logout()

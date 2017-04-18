@@ -115,14 +115,13 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func tweet(message: String, success: @escaping () -> (), failure: @escaping (Error) -> ()) {
-//        
-//        if reply_id != nil {
-//            params += "&in_reply_to_status_id=\(reply_id!)"
-//        }
+    func tweet(message: String, replyTweetId: Int?, success: @escaping () -> (), failure: @escaping (Error) -> ()) {
         
-        let encodedMessage = message.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let params = ["status": encodedMessage]
+        var params = ["status": message]
+        
+        if let replyId = replyTweetId {
+            params["in_reply_to_status_id"] = "\(replyId)"
+        }
         
         post("1.1/statuses/update.json", parameters: params, progress: nil, success: { (task, response) -> Void in
             print("new tweet successful")

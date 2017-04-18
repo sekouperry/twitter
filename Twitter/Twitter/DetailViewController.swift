@@ -103,4 +103,7 @@ class DetailViewController: UIViewController {
         
         favoritesLabel.text = "\(currentFavoriteValue)"
     }
+    @IBAction func onReplyButton(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didTapRetweet"), object: nil, userInfo: ["tweet": tweet])
+    }
 }

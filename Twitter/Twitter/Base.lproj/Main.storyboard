@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,17 +23,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYV-Nk-OLV">
-                                <rect key="frame" x="168" y="318" width="38" height="30"/>
+                                <rect key="frame" x="168.5" y="318" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="onLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HiJ-RK-zcc"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="EdK-en-8Aw">
+                                <rect key="frame" x="120.5" y="318.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EdK-en-8Aw" secondAttribute="height" multiplier="1:1" id="Wt2-qj-bvy"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="MYV-Nk-OLV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="EHv-Ph-ie2"/>
+                            <constraint firstItem="EdK-en-8Aw" firstAttribute="height" secondItem="MYV-Nk-OLV" secondAttribute="height" id="HXB-OC-9ay"/>
+                            <constraint firstItem="EdK-en-8Aw" firstAttribute="centerY" secondItem="MYV-Nk-OLV" secondAttribute="centerY" id="try-X7-dgY"/>
                             <constraint firstItem="MYV-Nk-OLV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ze6-AS-ljH"/>
+                            <constraint firstItem="MYV-Nk-OLV" firstAttribute="leading" secondItem="EdK-en-8Aw" secondAttribute="trailing" constant="18" id="zzH-GK-RjJ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -41,7 +51,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="82" y="139"/>
+            <point key="canvasLocation" x="80.799999999999997" y="138.98050974512745"/>
         </scene>
         <!--Tweets View Controller-->
         <scene sceneID="2Pi-SV-MoR">
@@ -58,6 +68,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="126" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NsV-PE-E4H">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetTableViewCell" rowHeight="126" id="ekQ-63-M9H" customClass="TweetTableViewCell" customModule="Twitter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="126"/>
@@ -151,6 +162,9 @@
                                                         <constraint firstAttribute="height" constant="16" id="Vky-MV-uSs"/>
                                                     </constraints>
                                                     <state key="normal" image="reply-button"/>
+                                                    <connections>
+                                                        <action selector="onReplyButton:" destination="ekQ-63-M9H" eventType="touchUpInside" id="Fef-aq-cI8"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGp-A4-Mqs">
                                                     <rect key="frame" x="118" y="101" width="16" height="16"/>
@@ -205,7 +219,8 @@
                                             <outlet property="favoriteButton" destination="8Cd-Et-I7E" id="bz5-3n-l5E"/>
                                             <outlet property="favoritesCountLabel" destination="Lru-dg-uvQ" id="eDb-Qs-GPf"/>
                                             <outlet property="nameLabel" destination="q0W-pM-f1g" id="cck-8M-dJB"/>
-                                            <outlet property="rewtweetCountLabel" destination="jJa-qS-7iR" id="j9c-GO-qMc"/>
+                                            <outlet property="retweetButton" destination="kGp-A4-Mqs" id="NKP-Gg-AbU"/>
+                                            <outlet property="retweetCountLabel" destination="jJa-qS-7iR" id="pKN-ig-Adp"/>
                                             <outlet property="timeLabel" destination="36K-wu-AGK" id="j1Z-fB-2mq"/>
                                             <outlet property="tweetTextLabel" destination="IkP-No-fGr" id="m82-QL-CV3"/>
                                             <outlet property="usernameLabel" destination="PUC-he-gHM" id="aLW-Et-jrO"/>
@@ -228,11 +243,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="R9a-L3-7zY">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="RKj-Pq-VnD">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onLogoutButton:" destination="B6b-gA-qHI" id="0BM-hH-hVQ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Ilb-b8-x6N">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onShowComposeViewController:" destination="B6b-gA-qHI" id="H1E-sd-PiR"/>
                             </connections>
@@ -299,6 +316,9 @@
                                             <constraint firstAttribute="width" constant="16" id="8MX-0K-o9Y"/>
                                         </constraints>
                                         <state key="normal" image="reply-button"/>
+                                        <connections>
+                                            <action selector="onReplyButton:" destination="8mB-Ak-n7A" eventType="touchUpInside" id="pme-0o-kQX"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MmV-oU-OUt">
                                         <rect key="frame" x="46" y="9.5" width="16" height="16"/>
@@ -417,9 +437,13 @@
             <objects>
                 <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="J0l-iD-B1g" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a6V-GP-zYs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="a6V-GP-zYs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.11372549019607843" green="0.63137254901960782" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -496,6 +520,7 @@
     </scenes>
     <resources>
         <image name="like-button" width="27" height="36"/>
+        <image name="logo" width="16" height="16"/>
         <image name="reply-button" width="32" height="36"/>
         <image name="retweet-button" width="37" height="36"/>
     </resources>
