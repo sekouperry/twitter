@@ -20,6 +20,12 @@
 		76C056FB1EA53C710016F708 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C056FA1EA53C710016F708 /* TweetTableViewCell.swift */; };
 		76C056FD1EA569590016F708 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C056FC1EA569590016F708 /* DetailViewController.swift */; };
 		76C056FF1EA570210016F708 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C056FE1EA570210016F708 /* ComposeViewController.swift */; };
+		76C057011EAAB8CC0016F708 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C057001EAAB8CC0016F708 /* ProfileViewController.swift */; };
+		76C057031EAAB8ED0016F708 /* MentionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C057021EAAB8ED0016F708 /* MentionsViewController.swift */; };
+		76C057051EAAB9020016F708 /* AccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C057041EAAB9020016F708 /* AccountsViewController.swift */; };
+		76C057071EAAB9B20016F708 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C057061EAAB9B20016F708 /* MenuViewController.swift */; };
+		76C0570A1EAABC840016F708 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C057091EAABC840016F708 /* MenuTableViewCell.swift */; };
+		76C0570C1EAABD7A0016F708 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0570B1EAABD7A0016F708 /* HamburgerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +46,12 @@
 		76C056FA1EA53C710016F708 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		76C056FC1EA569590016F708 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		76C056FE1EA570210016F708 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		76C057001EAAB8CC0016F708 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		76C057021EAAB8ED0016F708 /* MentionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsViewController.swift; sourceTree = "<group>"; };
+		76C057041EAAB9020016F708 /* AccountsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsViewController.swift; sourceTree = "<group>"; };
+		76C057061EAAB9B20016F708 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		76C057091EAABC840016F708 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		76C0570B1EAABD7A0016F708 /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +104,7 @@
 		76286AC31EA1801900BAA2E6 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				76C057081EAABC6F0016F708 /* Views */,
 				76C056EF1EA42D730016F708 /* API */,
 				76C056EE1EA42D610016F708 /* View Controllers */,
 				76C056ED1EA42D2F0016F708 /* Models */,
@@ -100,7 +113,6 @@
 				76286ACB1EA1801900BAA2E6 /* Assets.xcassets */,
 				76286ACD1EA1801900BAA2E6 /* LaunchScreen.storyboard */,
 				76286AD01EA1801900BAA2E6 /* Info.plist */,
-				76C056FA1EA53C710016F708 /* TweetTableViewCell.swift */,
 			);
 			path = Twitter;
 			sourceTree = "<group>";
@@ -121,6 +133,11 @@
 				76C056F81EA467CE0016F708 /* TweetsViewController.swift */,
 				76C056FC1EA569590016F708 /* DetailViewController.swift */,
 				76C056FE1EA570210016F708 /* ComposeViewController.swift */,
+				76C057001EAAB8CC0016F708 /* ProfileViewController.swift */,
+				76C057021EAAB8ED0016F708 /* MentionsViewController.swift */,
+				76C057041EAAB9020016F708 /* AccountsViewController.swift */,
+				76C057061EAAB9B20016F708 /* MenuViewController.swift */,
+				76C0570B1EAABD7A0016F708 /* HamburgerViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -131,6 +148,15 @@
 				76C056F61EA43B0E0016F708 /* TwitterClient.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		76C057081EAABC6F0016F708 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				76C056FA1EA53C710016F708 /* TweetTableViewCell.swift */,
+				76C057091EAABC840016F708 /* MenuTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,12 +285,18 @@
 			files = (
 				76C056FF1EA570210016F708 /* ComposeViewController.swift in Sources */,
 				76C056F71EA43B0E0016F708 /* TwitterClient.swift in Sources */,
+				76C0570A1EAABC840016F708 /* MenuTableViewCell.swift in Sources */,
+				76C0570C1EAABD7A0016F708 /* HamburgerViewController.swift in Sources */,
+				76C057011EAAB8CC0016F708 /* ProfileViewController.swift in Sources */,
 				76286AC71EA1801900BAA2E6 /* LoginViewController.swift in Sources */,
+				76C057031EAAB8ED0016F708 /* MentionsViewController.swift in Sources */,
 				76C056F91EA467CE0016F708 /* TweetsViewController.swift in Sources */,
 				76286AC51EA1801900BAA2E6 /* AppDelegate.swift in Sources */,
+				76C057071EAAB9B20016F708 /* MenuViewController.swift in Sources */,
 				76C056F11EA42D900016F708 /* User.swift in Sources */,
 				76C056F31EA42D9A0016F708 /* Tweet.swift in Sources */,
 				76C056FB1EA53C710016F708 /* TweetTableViewCell.swift in Sources */,
+				76C057051EAAB9020016F708 /* AccountsViewController.swift in Sources */,
 				76C056FD1EA569590016F708 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
