@@ -18,7 +18,12 @@ class LoginViewController: UIViewController {
     @IBAction func onLoginButton(_ sender: UIButton) {
         TwitterClient.sharedInstance?.login(success: {
             print("successfully logged in")
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            let hamburgerVC = self.storyboard?.instantiateViewController(withIdentifier: "HamburgerViewController") as! HamburgerViewController
+            let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+            
+            menuVC.hamburgerVC = hamburgerVC
+            hamburgerVC.menuVC = menuVC
+            self.present(hamburgerVC, animated: true, completion: nil)
         }, failure: { (error) in
             print("Error while logging in")
             print(error.localizedDescription)

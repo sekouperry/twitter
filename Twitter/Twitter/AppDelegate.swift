@@ -20,12 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().tintColor = UIColor.white
 
-//        if User.currentUser != nil {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
-//            window?.rootViewController = vc
-//        }
-//        
+        
         
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil, queue: OperationQueue.main) { (notification) in
@@ -34,11 +29,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-        let hamburgerVC = window!.rootViewController as! HamburgerViewController
-        let menuVC = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+        if User.currentUser != nil {
+            let hamburgerVC = storyboard.instantiateViewController(withIdentifier: "HamburgerViewController") as! HamburgerViewController
+            let menuVC = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+            
+            menuVC.hamburgerVC = hamburgerVC
+            hamburgerVC.menuVC = menuVC
+            window?.rootViewController = hamburgerVC
+        }
         
-        menuVC.hamburgerVC = hamburgerVC
-        hamburgerVC.menuVC = menuVC
+        
+        
         
         
         return true

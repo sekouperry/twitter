@@ -33,19 +33,18 @@ class TweetsViewController: UIViewController {
     }
 
     @IBAction func onLogoutButton(_ sender: UIBarButtonItem) {
-        TwitterClient.sharedInstance?.logout()
+        TwitterClient.sharedInstance?.logout(success: { 
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     func refreshTableData(_ refreshControl: UIRefreshControl) {
-        TwitterClient.sharedInstance?.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task, response) -> Void in
+        TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets) in
             
-            let dictionaries = response as! [NSDictionary]
-            
-            self.tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            self.tweets = tweets
             self.tableView.reloadData()
-        }, failure: { (task, error) -> Void in
-            print("unable to retrieve timeline")
-            print(error.localizedDescription)
+        }, failure: { (error) in
+            
         })
         refreshControl.endRefreshing()
     }
@@ -61,6 +60,11 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell", for: indexPath) as! TweetTableViewCell
         cell.tweet = tweets[indexPath.row]
         cell.selectionStyle = .none
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onImageTap(_:)))
+        cell.avatarImageView.isUserInteractionEnabled = true
+        cell.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+        
         return cell
     }
     
@@ -72,5 +76,21 @@ extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         vc.tweet = tweets[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func onImageTap(_ sender: UITapGestureRecognizer) {
+        let tapLocation = sender.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: tapLocation)!
+        let tweet = tweets[indexPath.row]
+        print("click")
+        TwitterClient.sharedInstance?.getUser(screenName: tweet.username!, success: { (user) in
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+            print(user.screenname)
+            vc.user = user
+            self.navigationController?.pushViewController(vc, animated: true)
+        }, failure: { (error) in
+            
+        })
+        
     }
 }

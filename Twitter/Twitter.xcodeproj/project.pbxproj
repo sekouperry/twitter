@@ -26,6 +26,7 @@
 		76C057071EAAB9B20016F708 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C057061EAAB9B20016F708 /* MenuViewController.swift */; };
 		76C0570A1EAABC840016F708 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C057091EAABC840016F708 /* MenuTableViewCell.swift */; };
 		76C0570C1EAABD7A0016F708 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0570B1EAABD7A0016F708 /* HamburgerViewController.swift */; };
+		76C057861EAC069F0016F708 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C057851EAC069F0016F708 /* ProfileTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		76C057061EAAB9B20016F708 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		76C057091EAABC840016F708 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		76C0570B1EAABD7A0016F708 /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		76C057851EAC069F0016F708 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			children = (
 				76C056FA1EA53C710016F708 /* TweetTableViewCell.swift */,
 				76C057091EAABC840016F708 /* MenuTableViewCell.swift */,
+				76C057851EAC069F0016F708 /* ProfileTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				76C057031EAAB8ED0016F708 /* MentionsViewController.swift in Sources */,
 				76C056F91EA467CE0016F708 /* TweetsViewController.swift in Sources */,
 				76286AC51EA1801900BAA2E6 /* AppDelegate.swift in Sources */,
+				76C057861EAC069F0016F708 /* ProfileTableViewCell.swift in Sources */,
 				76C057071EAAB9B20016F708 /* MenuViewController.swift in Sources */,
 				76C056F11EA42D900016F708 /* User.swift in Sources */,
 				76C056F31EA42D9A0016F708 /* Tweet.swift in Sources */,

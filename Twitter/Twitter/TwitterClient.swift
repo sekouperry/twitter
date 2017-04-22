@@ -34,10 +34,11 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func logout() {
+    func logout(success: () -> ()) {
         User.currentUser = nil
         deauthorize()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
+        success()
     }
     
     func handleOpenUrl(url: URL) {
@@ -62,6 +63,20 @@ class TwitterClient: BDBOAuth1SessionManager {
 
     }
     
+    func userTimeLine(screenName: String, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        get("1.1/statuses/user_timeline.json?screen_name=\(screenName)", parameters: nil, progress: nil, success: { (task, response) -> Void in
+            
+            let dictionaries = response as! [NSDictionary]
+            
+            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            success(tweets)
+        }, failure: { (task, error) -> Void in
+            print("unable to retrieve users timeline")
+            print(error.localizedDescription)
+            failure(error)
+        })
+    }
+    
     func homeTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
         get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task, response) -> Void in
             
@@ -71,6 +86,35 @@ class TwitterClient: BDBOAuth1SessionManager {
             success(tweets)
         }, failure: { (task, error) -> Void in
             print("unable to retrieve timeline")
+            print(error.localizedDescription)
+            failure(error)
+        })
+    }
+    
+    func mentionsTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        get("1.1/statuses/mentions_timeline.json", parameters: nil, progress: nil, success: { (task, response) -> Void in
+            
+            let dictionaries = response as! [NSDictionary]
+            
+            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            success(tweets)
+        }, failure: { (task, error) -> Void in
+            print("unable to retrieve timeline")
+            print(error.localizedDescription)
+            failure(error)
+        })
+    }
+    
+    func getUser(screenName: String, success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
+        print(screenName)
+        get("1.1/users/show.json?screen_name=\(screenName)", parameters: nil, progress: nil, success: { (task, response) -> Void in
+            
+            let dictionary = response as! NSDictionary
+            let user = User(dictionary: dictionary)
+            success(user)
+        }, failure: { (task, error) -> Void in
+            print("unable to retrieve user")
+            print(error.localizedDescription)
             failure(error)
         })
     }

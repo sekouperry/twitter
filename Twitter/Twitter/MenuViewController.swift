@@ -12,10 +12,10 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var profileVC: ProfileViewController!
-    private var timelineVC: TweetsViewController!
-    private var mentionsVC: MentionsViewController!
-    private var accountsVC: AccountsViewController!
+    private var profileVC: UIViewController!
+    private var timelineVC: UIViewController!
+    private var mentionsVC: UIViewController!
+    private var accountsVC: UIViewController!
     
     var hamburgerVC: HamburgerViewController!
 
@@ -25,15 +25,15 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
         initViewControllers()
+        tableView.rowHeight = view.frame.size.height / CGFloat(viewControllers.count)
     }
     
     func initViewControllers() {
-        profileVC = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-        timelineVC = storyboard?.instantiateViewController(withIdentifier: "TweetsViewController") as! TweetsViewController
-        mentionsVC = storyboard?.instantiateViewController(withIdentifier: "MentionsViewController") as! MentionsViewController
-        accountsVC = storyboard?.instantiateViewController(withIdentifier: "AccountsViewController") as! AccountsViewController
+        profileVC = storyboard?.instantiateViewController(withIdentifier: "ProfileNavigationVC")
+        timelineVC = storyboard?.instantiateViewController(withIdentifier: "TweetsNavigationVC")
+        mentionsVC = storyboard?.instantiateViewController(withIdentifier: "MentionsNavigationVC")
+        accountsVC = storyboard?.instantiateViewController(withIdentifier: "AccountsNavigationVC")
         
         viewControllers.append(profileVC)
         viewControllers.append(timelineVC)
@@ -49,6 +49,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
         let titles = ["Profile", "Timeline", "Mentions", "Accounts"]
         cell.menuTitleLabel.text = titles[indexPath.row]
+        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

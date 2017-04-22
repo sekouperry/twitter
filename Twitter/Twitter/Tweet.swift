@@ -43,11 +43,7 @@ class Tweet: Mappable {
         convertToDate()
         calculateTimeAgo()
     }
-    
-    
-    init(dictionary: NSDictionary) {
-    }
-    
+        
     func convertToDate() {
         if let createdAtString = createdAtString {
             let formatter = DateFormatter()
@@ -58,7 +54,7 @@ class Tweet: Mappable {
     
     func calculateTimeAgo() {
         let dateComponentsFormatter = DateComponentsFormatter()
-        dateComponentsFormatter.allowedUnits = [.second, .minute, .hour]
+        dateComponentsFormatter.allowedUnits = [.second, .minute, .hour, .day, .month, .year]
         dateComponentsFormatter.maximumUnitCount = 1
         dateComponentsFormatter.unitsStyle = .full
         let timeDiff = dateComponentsFormatter.string(from: createdAt!, to: Date())
